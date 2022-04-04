@@ -27,13 +27,13 @@ const RexAppBar = () => {
         <AppBar position="sticky" style={{ backgroundColor: '#ebebeb' }}>
             <Container maxWidth="100vh">
                 <Toolbar sx={{
-                    maxHeight: '5vh',
+                    maxHeight: '3vh',
                     overflow: 'visible',
                 }} disableGutters>
                     <Box
                         component="img"
                         sx={{
-                            height: 90,
+                            height: 60,
                             overflow: 'visible',
                         }}
                         alt="Logo"
