@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useContext } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -9,11 +10,16 @@ import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import MenuItem from '@mui/material/MenuItem';
 import Dino from "../assets/dino.png";
+import { UserContext } from "../context/UserContext";
+import Login from './Login';
+import Logout from './Logout';
 
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+
+// const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const RexAppBar = () => {
     const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const [user, _] = useContext(UserContext);
 
     const handleOpenUserMenu = (event) => {
         setAnchorElUser(event.currentTarget);
@@ -52,19 +58,9 @@ const RexAppBar = () => {
                     </Typography>
                     <Box sx={{ flexGrow: 1 }} />
                     <Box sx={{ flexGrow: 0 }}>
-                        {/* Notifications, if we decide to implement */}
-                        {/* <IconButton
-                            size="large"
-                            aria-label="show 17 new notifications"
-                            color="inherit"
-                        >
-                            <Badge badgeContent={17} color="error">
-                                <NotificationsIcon />
-                            </Badge>
-                        </IconButton> */}
 
                         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                            <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                            <Avatar src={user.imageUrl} />
                         </IconButton>
                         <Menu
                             sx={{ mt: '45px' }}
@@ -82,11 +78,9 @@ const RexAppBar = () => {
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
                         >
-                            {settings.map((setting) => (
-                                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                    <Typography textAlign="center">{setting}</Typography>
-                                </MenuItem>
-                            ))}
+                            <MenuItem key="logout" onClick={handleCloseUserMenu}>
+                                <Logout />
+                            </MenuItem>
                         </Menu>
                     </Box>
                 </Toolbar>
