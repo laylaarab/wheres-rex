@@ -1,0 +1,32 @@
+version: "3.7"
+services:   
+    web-react:
+        image: "node:16.4.2"
+        user: "node"
+        working_dir: /home/node/app
+        env_file: .env
+        volumes:
+        - ./view:/home/node/app
+        ports:
+        - 3000:3000
+        command: "npm run install_and_start"
+        restart: always
+    server:
+        image: "node:16.4.2"
+        user: "node"
+        working_dir: /home/node/app
+        env_file: .env
+        volumes:
+        - ./server:/home/node/app
+        ports:
+        - 5000:3000
+        command: "npm run install_and_start"
+        restart: always
+    mongo:
+        image: mongo
+        restart: always
+        env_file: .env
+        volumes:
+            - /data/db
+        ports:
+            - 8100:27017

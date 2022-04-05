@@ -4,6 +4,8 @@
     "description": "",
     "main": "index.js",
     "scripts": {
+        "install_and_start": "npm install && nodemon index.js",
+        "start": "node index.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {
@@ -17,7 +19,11 @@
     },
     "homepage": "https://github.com/laylaarab/wheres-rex#readme",
     "dependencies": {
+        "express": "^4.17.3",
+        "http": "^0.0.1-security",
         "n": "^8.1.0",
+        "nodemon": "^2.0.15",
+        "socket.io": "^4.4.1",
         "stable": "^0.1.8"
     }
 }
