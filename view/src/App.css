@@ -1,3 +1,7 @@
+body {
+    background-color: #ebebeb!important
+}
+
 .App {
     text-align: center;
 }
@@ -60,4 +64,16 @@ div#login-title {
 
 img#rex-logo {
     width: 100%;
+}
+
+img.avatar-home {
+    width: 100%;
+    margin: 10px;
+    border-radius: 20px;
+}
+
+h1.name {
+    color: #525252;
+    text-align: left;
+    padding-left: 20px;
 }

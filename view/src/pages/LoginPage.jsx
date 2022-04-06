@@ -29,7 +29,7 @@ export default function LoginPage() {
                     Where's Rex?
                 </h1>
             </Grid>
-            <Grid item xs={12} class="login-title">
+            <Grid item xs={12} id="login-title">
                 <div id="login-explore">
                     <h2>EXPLORE THE UNIVERSITY OF CALGARY</h2>    
                     <h3>Can you help find Rex all around our campus?</h3>

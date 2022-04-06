@@ -24,6 +24,7 @@ export default function App() {
 
   // Setting page scroll to 0 when changing the route
   useEffect(() => {
+    document.title = "Where's Rex";
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
   }, [pathname]);
