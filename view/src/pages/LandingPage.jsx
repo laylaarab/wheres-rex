@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import Grid from '@mui/material/Grid';
 import RexAppBar from '../components/NavBar';
 import Container from '@mui/material/Container';
+import { Link } from 'react-router-dom'
 import { Avatar } from "@mui/material";
 import { UserContext } from "../context/UserContext";
 import { Navigate } from "react-router-dom";
@@ -56,7 +57,7 @@ function LandingPage() {
                         </Grid>
                         <Grid item container xs={12} md={3}>
                             <Grid item xs={12}>
-                                <Button variant="contained">Single Player</Button>
+                                <Button variant="contained" component={Link} to="/single-player/">Single Player</Button>
                             </Grid>
                             <Grid item xs={12}>
                                 <Button variant="contained">Create a Lobby</Button>

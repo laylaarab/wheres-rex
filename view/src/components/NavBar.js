@@ -79,7 +79,7 @@ const RexAppBar = () => {
                             onClose={handleCloseUserMenu}
                         >
                             <MenuItem key="logout" onClick={handleCloseUserMenu}>
-                                <Logout />
+                                {user ? <Logout /> : <Login />}
                             </MenuItem>
                         </Menu>
                     </Box>

@@ -1,4 +1,5 @@
 import './App.css';
+
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 
 import { useEffect, useContext } from "react";
@@ -11,6 +12,8 @@ import CssBaseline from "@mui/material/CssBaseline";
 // Pages
 import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
+import SinglePlayerGamePage from './pages/SinglePlayerGamePage';
+import SinglePlayerGameResultsPage from './pages/SinglePlayerGameResultsPage';
 
 const queryClient = new QueryClient()
 
@@ -36,6 +39,8 @@ export default function App() {
           <Routes>
             <Route path="/landing-page" element={<LandingPage />} />
             <Route path="/login-page" element={<LoginPage />} />
+            <Route path="/single-player" element={<SinglePlayerGamePage />} />
+            <Route path="/single-player/results/:gameId" element={<SinglePlayerGameResultsPage />} />
             <Route path="/" element={
               user == null ? <Navigate to="/login-page" /> : <Navigate to="landing-page" />
             } />

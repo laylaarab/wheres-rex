@@ -5,6 +5,8 @@ const path = require('path');
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 const port = process.env.PORT || 3000;
+const gameController = require('./gameController.js')
+const database = require('./database.js')
 
 server.listen(port, () => {
     console.log('Server listening at port %d', port);
@@ -22,6 +24,11 @@ app.get('/api/user-stats', (req, res) => {
         fastestTime: 12,
         bestScore: 55
     })
+})
+
+
+app.get('/api/single-game/result/:gameId', (req, res) => {
+    res.send(database.getSinglePlayerGameResult(req.params.gameId));
 })
 
 

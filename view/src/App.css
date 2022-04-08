@@ -77,3 +77,18 @@ h1.name {
     text-align: left;
     padding-left: 20px;
 }
+
+div#map-grid {
+    margin-top: -300px;
+}
+
+
+/* TODO fix */
+
+span#score-box {
+    position: fixed;
+    z-index: 1000000;
+    left: 50%;
+    top: 11px;
+    font-size: 27px;
+}
