@@ -19,6 +19,7 @@ function Login() {
     };
 
     const onFailure = (res) => {
+        console.error(res);
         setUser(null)
     };
 
