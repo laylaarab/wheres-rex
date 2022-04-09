@@ -16,29 +16,25 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { BrowserRouter } from 'react-router-dom';
 
 const theme = createTheme({
-    palette: {
-        primary: {
-            main: '#fff',
-        },
-        secondary: {
-            main: 'rgba(255, 255, 255, 0.7)',
-        },
+  palette: {
+    primary: {
+      main: '#fff',
     },
+    secondary: {
+      main: 'rgba(255, 255, 255, 0.7)',
+    },
+  },
 });
 
-ReactDOM.render( <
-    UserContextProvider >
-    <
-    BrowserRouter >
-    <
-    ThemeProvider theme = { theme } >
-    <
-    App / >
-    <
-    /ThemeProvider> <
-    /BrowserRouter> <
-    /UserContextProvider>,
-    document.getElementById('root')
+ReactDOM.render(
+  <UserContextProvider>
+    <BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
+  </BrowserRouter>
+</UserContextProvider>,
+  document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

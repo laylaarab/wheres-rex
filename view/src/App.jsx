@@ -14,10 +14,10 @@ import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
 import SinglePlayerGamePage from './pages/SinglePlayerGamePage';
 import SinglePlayerGameResultsPage from './pages/SinglePlayerGameResultsPage';
+import MultiPlayerGamePage from './pages/MultiPlayerGamePage';
+import MultiPlayerGameResultsPage from './pages/MultiPlayerGameResultsPage';
 
 const queryClient = new QueryClient()
-
-const ENDPOINT = "http://127.0.0.1:4001";
 
 export default function App() {
   const [user, _] = useContext(UserContext);
@@ -41,6 +41,8 @@ export default function App() {
             <Route path="/login-page" element={<LoginPage />} />
             <Route path="/single-player" element={<SinglePlayerGamePage />} />
             <Route path="/single-player/results/:gameId" element={<SinglePlayerGameResultsPage />} />
+            <Route path="/multi-player/" element={ <MultiPlayerGamePage />} />
+            <Route path="/multi-player/results/:roomId/:gameId" element={ <MultiPlayerGameResultsPage />} />
             <Route path="/" element={
               user == null ? <Navigate to="/login-page" /> : <Navigate to="landing-page" />
             } />

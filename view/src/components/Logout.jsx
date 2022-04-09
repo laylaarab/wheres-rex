@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { useNavigate } from "react-router-dom";
 import { GoogleLogout } from 'react-google-login';
 import { UserContext } from "../context/UserContext";
 
@@ -8,9 +9,10 @@ const clientId =
 
 function Logout() {
     const [user, setUser] = useContext(UserContext);
-
+    const navigate = useNavigate();
     const onSuccess = () => {
         setUser(null)
+        navigate(`/`)
     };
 
     return (

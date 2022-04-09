@@ -11,7 +11,7 @@ export default function PhotoSphere({imgUrl}) {
       image={imgUrl}
       pitch={10} 
       yaw={180}
-      hfov={90}
+      hfov={130}
       autoLoad
       showZoomCtrl={true}
    >

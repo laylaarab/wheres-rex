@@ -3,18 +3,18 @@ import { useQuery } from 'react-query'
 import Grid from '@mui/material/Grid';
 import { UserContext } from "../../context/UserContext";
 import FlagIcon from '@mui/icons-material/Flag';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import axios from 'axios';
 
-async function fetchUserStats() {
-    const { data } = await axios.get('/api/user-stats')
+async function fetchUserStats(userId) {
+    const { data } = await axios.get(`/api/user-stats/${userId}`)
     return data
 }
 
 export default function UserStats() {
     const [user, _] = useContext(UserContext);
-    const {data, error, isError, isLoading } = useQuery('posts', fetchUserStats) 
+    const {data, error, isError, isLoading } = useQuery('userstats', () => fetchUserStats(user.googleId)) 
 
     if(isLoading || isError) {
         return <div>Loading...</div>
@@ -27,8 +27,8 @@ export default function UserStats() {
                 <span className="stat">{data.gamesPlayed}</span> <span className="stat-title">Games Played</span>
             </Grid>
             <Grid item xs={4}>
-                <AccessTimeIcon />
-                <span className="stat">{data.fastestTime} min</span> <span className="stat-title">Fastest Time</span>
+                <CheckCircleOutlineIcon />
+                <span className="stat">{data.avgScore}</span> <span className="stat-title">Average Score</span>
             </Grid>
             <Grid item xs={4}>
                 <CheckCircleIcon />

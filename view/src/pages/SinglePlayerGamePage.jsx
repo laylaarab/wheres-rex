@@ -18,6 +18,7 @@ import UserStats from "../components/landing-page/UserStats";
 import LeaderBoard from "../components/landing-page/LeaderBoard";
 import PhotoSphere from "../components/PhotoSphere"
 import io from "socket.io-client";
+import Score from "../components/Score"
 import MapLocation from "../components/MapLocation";
 
 export default function SinglePlayerGamePage() {
@@ -38,7 +39,7 @@ export default function SinglePlayerGamePage() {
         setSocket(socket);
 
         socket.on("connect", () => {
-            socket.emit('newSinglePlayerGame', user.googleId)
+            socket.emit('newSinglePlayerGame', user)
 
             socket.emit('getImage', user.googleId)
             socket.on("newImage", (data, callback) => {
@@ -52,24 +53,18 @@ export default function SinglePlayerGamePage() {
 
             socket.on("gameOver", (data, callback) => {
                 console.log(`Received game OVER`);
-                // socket.close()
+                const id = socket.id
+                socket.close()
 
-                navigate(`/single-player/results/${socket.id}`)
+                navigate(`/single-player/results/${id}`)
             });
         });
         return () => socket.close();
-    }, [navigate, setSocket, user]);
+    }, [navigate, setSocket, setScore, user]);
 
-    // socket.emit('newSinglePlayerGame', user.googleId)
-    // socket.emit('getImage', user.googleId)
-
-
-    // socket.on("newImage", (data, callback) => {
-    //     console.log(`Received game ${data}`);
-    //     setImg(data.img)
-    // });
-
-
+    const submitGuess = function (coords) {
+        socket.emit('submitGuess', coords)
+    }
 
     if (!user) {
         return <div className="error">You must be logged in! <Login /></div>
@@ -84,9 +79,8 @@ export default function SinglePlayerGamePage() {
                 }}>
                 {socket ? (
                     <Grid container spacing={2} id="">
-                        <span id="score-box">
-                            {score}
-                        </span>
+                        <Score score={score} />
+
                         <Grid item xs={12}>
                             <PhotoSphere imgUrl={'/img_360/' + img} />
                         </Grid>
@@ -94,7 +88,7 @@ export default function SinglePlayerGamePage() {
                             <Grid item md={9} xs={12}>
                             </Grid>
                             <Grid item md={3} xs={12}>
-                                <MapLocation width={350} height={300} socket={socket} />
+                                <MapLocation width={350} height={300} socket={socket} handler={submitGuess} />
                             </Grid>
                         </Grid>
                     </Grid>

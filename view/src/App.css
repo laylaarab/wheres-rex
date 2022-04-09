@@ -80,6 +80,7 @@ h1.name {
 
 div#map-grid {
     margin-top: -300px;
+    cursor: crosshair;
 }
 
 

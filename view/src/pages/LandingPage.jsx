@@ -18,17 +18,6 @@ import LeaderBoard from "../components/landing-page/LeaderBoard";
 
 function LandingPage() {
 
-
-
-    // const [response, setResponse] = useState("");
-
-    // useEffect(() => {
-    //     const socket = socketIOClient(ENDPOINT);
-    //     socket.on("FromAPI", data => {
-    //         setResponse(data);
-    //     });
-    // }, []);
-
     const [user, _] = useContext(UserContext);
     if (!user) {
         return <Navigate to="/login-page" />
@@ -60,7 +49,7 @@ function LandingPage() {
                                 <Button variant="contained" component={Link} to="/single-player/">Single Player</Button>
                             </Grid>
                             <Grid item xs={12}>
-                                <Button variant="contained">Create a Lobby</Button>
+                                <Button variant="contained" component={Link} to="/multi-player/">Join a Lobby</Button>
                             </Grid>
                         </Grid>
                         <UserStats />
