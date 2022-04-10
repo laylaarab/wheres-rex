@@ -15,9 +15,9 @@ import { DataGrid } from '@mui/x-data-grid';
 import UserStats from "../components/landing-page/UserStats";
 import LeaderBoard from "../components/landing-page/LeaderBoard";
 
-
+// Main page after logging in 
 function LandingPage() {
-
+    // Go to login page if not logged in
     const [user, _] = useContext(UserContext);
     if (!user) {
         return <Navigate to="/login-page" />
@@ -39,10 +39,15 @@ function LandingPage() {
                         <Grid item xs={12} md={3}>
                             <img referrerPolicy="no-referrer" className="avatar-home" src={user.imageUrl} alt={user.name} />
                         </Grid>
-                        <Grid item xs={12} md={6}>
-                            <h1 className="name">
-                                {user.name}
-                            </h1>
+                        <Grid item container xs={12} md={6}>
+                            <Grid item xs={12}>
+                                <h1 className="name">
+                                    {user.name}
+                                </h1>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <UserStats />
+                            </Grid>
                         </Grid>
                         <Grid item container xs={12} md={3}>
                             <Grid item xs={12}>
@@ -52,7 +57,7 @@ function LandingPage() {
                                 <Button variant="contained" component={Link} to="/multi-player/">Join a Lobby</Button>
                             </Grid>
                         </Grid>
-                        <UserStats />
+
                     </Grid>
                     <Grid item xs={12} s={12}>
                         <LeaderBoard />
