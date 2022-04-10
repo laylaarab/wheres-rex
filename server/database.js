@@ -1,3 +1,4 @@
+// Game histories
 const singlePlayerGameHistory = {}
 const multiPlayerGameHistory = {}
 
@@ -16,7 +17,7 @@ module.exports.getSinglePlayerGameResult = function(gameId) {
     return singlePlayerGameHistory[gameId]
 }
 
-// Game results for a single player game
+// Game results for a single player game for a specific user
 module.exports.getAllSinglePlayerGameResults = function(userId) {
     const result = [];
     Object.keys(singlePlayerGameHistory).forEach(key => {
@@ -26,6 +27,36 @@ module.exports.getAllSinglePlayerGameResults = function(userId) {
     })
     return result
 
+}
+
+// Game results for a single player game for all users
+module.exports.getSinglePlayerLeaderboardResults = function() {
+    // gamelist for each user
+    let userGames = {};
+    let userData = {};
+    // iterate over the singleplayer games
+
+    Object.keys(singlePlayerGameHistory).forEach(key => {
+        game = singlePlayerGameHistory[key];
+        userID = game.user.googleId;
+        userData[userID] = {
+            imageURL: game.user.imageUrl,
+            name: game.user.name,
+        };
+        if (userGames[userID] == undefined) {
+            userGames[userID] = [];
+        }
+        userGames[userID].push(game)
+    });
+    // aggregate data
+    Object.keys(userGames).forEach(key => {
+        console.log(userGames[key]);
+        const scores = userGames[key].map((game) => game.score)
+        userData[key].gamesPlayed = userGames[key].length;
+        userData[key].bestScore = Math.max(...scores);
+        userData[key].id = key;
+    });
+    return userData;
 }
 
 // Get the game result for a multiplayer game

@@ -39,6 +39,15 @@ app.get('/api/user-stats/:userId', (req, res) => {
     }
 })
 
+// Get the user stats for all users in single player 
+app.get('/api/leaderboard', (req, res) => {
+    let data = database.getSinglePlayerLeaderboardResults()
+    var leaderboardData = Object.keys(data).map(key => {
+        return data[key];
+    })
+    res.send(leaderboardData);
+});
+
 // Get results for a singleplayer game
 app.get('/api/single-game/result/:gameId', (req, res) => {
     res.send(database.getSinglePlayerGameResult(req.params.gameId));

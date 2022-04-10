@@ -62,9 +62,6 @@ function LandingPage() {
                     <Grid item xs={12} s={12}>
                         <LeaderBoard />
                     </Grid>
-                    <Grid item xs={12} id="">
-
-                    </Grid>
                 </Grid>
             </Container>
         </div>
