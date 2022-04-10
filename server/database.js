@@ -1,21 +1,23 @@
 const singlePlayerGameHistory = {}
 const multiPlayerGameHistory = {}
 
-
+// Game history for a single player game
 module.exports.addSinglePlayerGameHistory = function(gameId, game) {
     singlePlayerGameHistory[gameId] = game
 }
 
+// Game history for a multiplayer game
 module.exports.addMultiPlayerGameHistory = function(roomId, game) {
     multiPlayerGameHistory[roomId] = game
 }
 
+// Game results for a single player game
 module.exports.getSinglePlayerGameResult = function(gameId) {
     return singlePlayerGameHistory[gameId]
 }
 
-module.exports.getSinglePlayerUserGameResults = function(userId) {
-    // user
+// Game results for a single player game
+module.exports.getAllSinglePlayerGameResults = function(userId) {
     const result = [];
     Object.keys(singlePlayerGameHistory).forEach(key => {
         if (singlePlayerGameHistory[key].user.googleId == userId) {
@@ -26,14 +28,13 @@ module.exports.getSinglePlayerUserGameResults = function(userId) {
 
 }
 
-
+// Get the game result for a multiplayer game
 module.exports.getMultiPlayerGameResult = function(roomId) {
     return multiPlayerGameHistory[roomId]
 }
 
+// The 360 images used for games
 module.exports.getGames = function() {
-    // Unknowns: CS-Class
-    // MT-Main.jpg
     return [{
             img: 'AD-Garden.jpg',
             x: 300,

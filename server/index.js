@@ -8,18 +8,20 @@ const port = process.env.PORT || 3000;
 const gameController = require('./gameController.js')
 const database = require('./database.js')
 
+// Init express webserver
 server.listen(port, () => {
     console.log('Server listening at port %d', port);
 });
 
 
 app.get('/', (req, res) => {
-    res.send('Hello World! poop')
+    res.send('Hello World!')
 })
 
+// Get the user stats for a user 
 app.get('/api/user-stats/:userId', (req, res) => {
     const googleId = req.params.userId;
-    games = database.getSinglePlayerUserGameResults(googleId);
+    games = database.getAllSinglePlayerGameResults(googleId);
     if (games.length == 0) {
         res.send({
             gamesPlayed: 0,
@@ -37,11 +39,12 @@ app.get('/api/user-stats/:userId', (req, res) => {
     }
 })
 
-
+// Get results for a singleplayer game
 app.get('/api/single-game/result/:gameId', (req, res) => {
     res.send(database.getSinglePlayerGameResult(req.params.gameId));
 })
 
+// Get results for a multiplayer game
 app.get('/api/multi-game/result/:roomId/:gameId', (req, res) => {
     data = database.getMultiPlayerGameResult(req.params.roomId);
     finalScores = {}
@@ -55,16 +58,11 @@ app.get('/api/multi-game/result/:roomId/:gameId', (req, res) => {
     res.send(finalScores)
 })
 
-
-// create a Socket.IO server, and attaching it to the http server
-
-// get controller with game session functions
-// const gameController = require('./game_controller');
-
+// Manage game lobbies
 gameController.initRoomManagement(io)
 
 // listen for Socket.IO connections
 io.sockets.on('connection', function(socket) {
     console.log('client connected');
-    gameController.initGameSession(io, socket);
+    gameController.initMultiplayerGameSession(io, socket);
 });
