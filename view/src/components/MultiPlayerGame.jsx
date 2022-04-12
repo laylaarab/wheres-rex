@@ -13,7 +13,7 @@ import Score from "./Score";
 export default function MultiPlayerGame({ socket, lobbyId }) {
     const [user, _] = useContext(UserContext);
     const [img, setImg] = useState('');
-    const [guessPlaced, setGuessPlaced ] = useState(false);
+    const [guessPlaced, setGuessPlaced] = useState(false);
     const [score, setScore] = useState(0);
     const navigate = useNavigate();
 
@@ -48,8 +48,8 @@ export default function MultiPlayerGame({ socket, lobbyId }) {
     const submitGuess = function (coords) {
         setGuessPlaced(true);
 
-        socket.emit('multiPlayerSubmitGuess', {lobbyId: lobbyId, coords: coords})
-        
+        socket.emit('multiPlayerSubmitGuess', { lobbyId: lobbyId, coords: coords })
+
     }
 
     return (
@@ -63,12 +63,12 @@ export default function MultiPlayerGame({ socket, lobbyId }) {
                     <Grid container id="map-grid">
                         <Grid item md={9} xs={12}>
                         </Grid>
-                        <Grid item md={3} xs={12}>
+                        <Grid id="map-loc-fix" item md={3} xs={12}>
                             {
                                 guessPlaced ? (
                                     <></>
                                 ) : (
-                                    <MapLocation width={350} height={300} handler={submitGuess} disabled/>
+                                    <MapLocation width={350} height={300} handler={submitGuess} disabled />
                                 )
                             }
                         </Grid>

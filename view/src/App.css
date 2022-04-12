@@ -84,6 +84,14 @@ h1.name {
 div#map-grid {
     margin-top: -300px;
     cursor: crosshair;
+
+}
+
+div#map-loc-fix {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    max-width: 350px;
 }
 
 span#score-box {
@@ -98,6 +106,15 @@ span#score-box {
     padding-right: 2px;
     padding-left: 2px;
 }
+
+div#chip-score {
+    position: fixed;
+    top: 55px;
+    z-index: 10000;
+    left: 75px;
+}
+
+
 
 /* Responsive Sizing for Mobile */
 @media screen and (max-width: 800px) {

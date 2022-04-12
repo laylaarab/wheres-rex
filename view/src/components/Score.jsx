@@ -1,7 +1,7 @@
+import Chip from '@mui/material/Chip'
+
 export default function Score({ score }) {
     return (
-        <span id="score-box">
-            You scored {score} points last round.
-        </span>
+        <Chip label={`You scored ${score} points last round.`} id='chip-score' color={'success'} />
     );
 }

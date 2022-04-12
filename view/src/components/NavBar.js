@@ -35,7 +35,7 @@ const RexAppBar = () => {
             <Container maxWidth="100vh">
                 <Toolbar sx={{
                     maxHeight: '3vh',
-                    overflow: 'visible',
+                    overflow: 'visible'
                 }} disableGutters>
                     <Link href="/landing-page">
                         <Box
