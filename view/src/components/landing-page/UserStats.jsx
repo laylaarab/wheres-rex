@@ -14,26 +14,29 @@ async function fetchUserStats(userId) {
 
 export default function UserStats() {
     const [user, _] = useContext(UserContext);
-    const {data, error, isError, isLoading } = useQuery('userstats', () => fetchUserStats(user.googleId)) 
+    const { data, error, isError, isLoading } = useQuery('userstats', () => fetchUserStats(user.googleId))
 
-    if(isLoading || isError) {
+    if (isLoading || isError) {
         return <div>Loading...</div>
     }
 
     return (
         <Grid item container xs={12} className="scores-box">
-            <Grid item xs={4}>
-                <FlagIcon />
-                <span className="stat">{data.gamesPlayed}</span> <span className="stat-title">Games Played</span>
+            <Grid item xs={12} md={4} display={"flex"}>
+                <span className="stat"><FlagIcon /></span>
+                <span className="stat">{data.gamesPlayed}</span>
+                <span className="stat">Games Played</span>
             </Grid>
-            <Grid item xs={4}>
-                <CheckCircleOutlineIcon />
-                <span className="stat">{data.avgScore}</span> <span className="stat-title">Average Score</span>
+            <Grid item xs={12} md={4} display={"flex"}>
+                <span className="stat"><CheckCircleOutlineIcon /></span>
+                <span className="stat">{data.avgScore}</span>
+                <span className="stat">Average Score</span>
             </Grid>
-            <Grid item xs={4}>
-                <CheckCircleIcon />
-                <span className="stat">{data.bestScore}</span> <span className="stat-title">Best Score</span>
+            <Grid item xs={12} md={4} display={"flex"}>
+                <span className="stat"><CheckCircleIcon /></span>
+                <span className="stat">{data.bestScore}</span>
+                <span className="stat">Best Score</span>
             </Grid>
-        </Grid>
+        </Grid >
     );
 }

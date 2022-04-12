@@ -36,11 +36,11 @@ function LandingPage() {
                 }}>
                 <Grid container spacing={2} id="">
                     <Grid item container spacing={2} xs={12}>
-                        <Grid item xs={12} md={3}>
+                        <Grid item xs={12} sm={5} md={2}>
                             <img referrerPolicy="no-referrer" className="avatar-home" src={user.imageUrl} alt={user.name} />
                         </Grid>
-                        <Grid item container xs={12} md={6}>
-                            <Grid item xs={12}>
+                        <Grid item container xs={12} sm={7}>
+                            <Grid item xs={12} md={6}>
                                 <h1 className="name">
                                     {user.name}
                                 </h1>
@@ -49,12 +49,12 @@ function LandingPage() {
                                 <UserStats />
                             </Grid>
                         </Grid>
-                        <Grid item container xs={12} md={3}>
-                            <Grid item xs={12}>
-                                <Button variant="contained" component={Link} to="/single-player/">Single Player</Button>
+                        <Grid item container xs={12} spacing={2}>
+                            <Grid item xs={12} sm={5} md={2}>
+                                <Button fullWidth variant="contained" component={Link} to="/single-player/">Single Player</Button>
                             </Grid>
-                            <Grid item xs={12}>
-                                <Button variant="contained" component={Link} to="/multi-player/">Join a Lobby</Button>
+                            <Grid item xs={12} sm={5} md={2}>
+                                <Button fullWidth variant="contained" component={Link} to="/multi-player/">Join a Lobby</Button>
                             </Grid>
                         </Grid>
 
