@@ -14,10 +14,8 @@ server.listen(port, () => {
 });
 
 
-app.get('/', (req, res) => { <<
-    <<
-    << < HEAD
-    res.send('Hello World!');
+app.get('/', (req, res) => {
+    res.send('Rex!');
 })
 
 restController.iniRestManagement(app);
