@@ -1,5 +1,6 @@
 body {
-    background-color: #ebebeb !important
+    background-color: #ebebeb !important;
+    overflow-x: hidden;
 }
 
 .App {
@@ -53,14 +54,14 @@ div#login-page-box {
     color: white;
     font-size: 3em;
     text-align: center;
-    text-shadow: 3px 6px 7px black;
+    text-shadow: 6px 12px 14px black;
     width: 100%;
 }
 
 div#login-title {
     color: white;
     font-size: 3em;
-    text-shadow: 3px 6px 7px black;
+    text-shadow: 6px 12px 14px black;
 }
 
 img#rex-logo {
@@ -99,11 +100,47 @@ span#score-box {
 }
 
 /* Responsive Sizing for Mobile */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
     h1.name {
         color: #525252;
         text-align: left;
         padding-left: 20px;
         padding-bottom: 50px;
+    }
+
+    h1.login-title {
+        color: white;
+        font-size: 1.2em;
+        text-align: center;
+        text-shadow: 6px 12px 14px black;
+        width: 95%;
+    }
+
+    h2.login-explore,
+    h3.login-explore {
+        color: white;
+        font-size: 0.8em;
+        text-align: left;
+        text-shadow: 6px 12px 14px black;
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 1200px) and (min-width:801px) {
+    h1.login-title {
+        color: white;
+        font-size: 2em;
+        text-align: center;
+        text-shadow: 6px 12px 14px black;
+        width: 95%;
+    }
+
+    h2.login-explore,
+    h3.login-explore {
+        color: white;
+        font-size: 1.5em;
+        text-align: left;
+        text-shadow: 6px 12px 14px black;
+        width: 80%;
     }
 }
