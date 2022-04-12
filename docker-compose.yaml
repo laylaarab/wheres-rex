@@ -22,11 +22,12 @@ services:
         - 5000:3000
         command: "npm run install_and_start"
         restart: always
-    mongo:
-        image: mongo
-        restart: always
-        env_file: .env
-        volumes:
-            - /data/db
-        ports:
-            - 8100:27017
+    # mongo:
+    # # Image not used
+    #     image: mongo
+    #     restart: always
+    #     env_file: .env
+    #     volumes:
+    #         - /data/db
+    #     ports:
+    #         - 8100:27017
