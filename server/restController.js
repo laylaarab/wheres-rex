@@ -4,10 +4,11 @@ module.exports.iniRestManagement = function(app) {
 
     // User Stats rest API endpoints
 
-    // Stats for a user
+
+    // Get the user stats for a user 
     app.get('/api/user-stats/:userId', (req, res) => {
         const googleId = req.params.userId;
-        games = database.getSinglePlayerUserGameResults(googleId);
+        games = database.getAllSinglePlayerGameResults(googleId);
         if (games.length == 0) {
             res.send({
                 gamesPlayed: 0,
@@ -25,13 +26,22 @@ module.exports.iniRestManagement = function(app) {
         }
     })
 
+    // Get the user stats for all users in single player 
+    app.get('/api/leaderboard', (req, res) => {
+        let data = database.getSinglePlayerLeaderboardResults()
+        var leaderboardData = Object.keys(data).map(key => {
+            return data[key];
+        })
+        res.send(leaderboardData);
+    });
 
-    // Results of a single player game
+
+    // Get results for a singleplayer game
     app.get('/api/single-game/result/:gameId', (req, res) => {
         res.send(database.getSinglePlayerGameResult(req.params.gameId));
     })
 
-    // Results of a multiplayer game
+    // Get results for a multiplayer game
     app.get('/api/multi-game/result/:roomId/:gameId', (req, res) => {
         data = database.getMultiPlayerGameResult(req.params.roomId);
         finalScores = {}

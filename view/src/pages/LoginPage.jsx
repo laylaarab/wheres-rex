@@ -12,9 +12,8 @@ import { UserContext } from "../context/UserContext";
 import { Navigate } from "react-router-dom";
 import Login from "../components/Login";
 
+// Page routed to before logging in
 export default function LoginPage() {
-
-
     const [user, _] = useContext(UserContext);
     if (user) {
         return <Navigate to="/landing-page" />

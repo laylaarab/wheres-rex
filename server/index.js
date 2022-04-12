@@ -8,12 +8,15 @@ const gameController = require('./gameController.js')
 const restController = require('./restController.js')
 require('./database.js')
 
+// Init express webserver
 server.listen(port, () => {
     console.log('Server listening at port %d', port);
 });
 
 
-app.get('/', (req, res) => {
+app.get('/', (req, res) => { <<
+    <<
+    << < HEAD
     res.send('Hello World!');
 })
 
@@ -28,5 +31,5 @@ gameController.initRoomManagement(io);
 // listen for Socket.IO connections and init the game controller instance
 io.sockets.on('connection', function(socket) {
     console.log('client connected');
-    gameController.initGameSession(io, socket);
+    gameController.initMultiplayerGameSession(io, socket);
 });

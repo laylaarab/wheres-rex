@@ -3,15 +3,19 @@ const GAME_LENGTH = 5;
 const MAX_SCORE = 460;
 const games = {}
 
+// Array of current multiplayer games
 const multiPlayerGames = {}
 
+// Map of userID to socketID
 const socketMap = {}
 
+// Multiplayer lobby object
 let multiPlayerLobby = {
     id: '',
     open: false
 }
 
+// Manages the lobby rooms for the game
 module.exports.initRoomManagement = function(io) {
     io.of("/").adapter.on("join-room", (room, id) => {
         members = io.sockets.adapter.rooms.get(room);
@@ -29,24 +33,22 @@ module.exports.initRoomManagement = function(io) {
     });
 }
 
-
-module.exports.initGameSession = function(io, socket) {
+// Start a multiplayer game session
+module.exports.initMultiplayerGameSession = function(io, socket) {
     console.log('new client connected');
-    //  socket.emit('connection', null);
     socket.on('disconnect', () => {
         console.log(`Disconnected from: ${socket.id}`)
     });
-    // MultiPlayer
-
-    socket.on('multiPlayerGame', (data, callback) => {
+    socket.on('multiPlayerGame', (userData, callback) => {
         console.log('new game lobby from ' + socket.id)
+            // add user's data to socket
+        socketMap[socket.id] = userData;
 
-        socketMap[socket.id] = data;
-
-        // Create a lobby
+        // Create a multiplayer lobby
         if (!multiPlayerLobby.open) {
+            // Mark lobby as open to start a lobby
             multiPlayerLobby.open = true;
-            multiPlayerLobby.id = `${socket.id}_${data.googleId}`
+            multiPlayerLobby.id = `${socket.id}_${userData.googleId}`
             console.log(`Creating a new lobby ${multiPlayerLobby.id}`)
             gameList = getGameList();
             multiPlayerGames[multiPlayerLobby.id] = {
@@ -62,7 +64,7 @@ module.exports.initGameSession = function(io, socket) {
         socket.emit('multiPlayerLobbyId', multiPlayerLobby.id)
     });
 
-
+    // start a multiplayer game
     socket.on('startMultiPlayer', (data, callback) => {
         // Create a lobby
         if (multiPlayerLobby.open) {
@@ -77,11 +79,12 @@ module.exports.initGameSession = function(io, socket) {
             sendNextMultiPlayerImage(roomId);
         }
     });
-
+    // send an image to a multiplayer game
     socket.on('multiPlayerGetImage', (roomId) => {
         sendNextMultiPlayerImage(roomId);
     });
 
+    // if the player sumbits their guess
     socket.on('multiPlayerSubmitGuess', (data) => {
         console.log('submitGuess from ' + socket.id)
         game = multiPlayerGames[data.lobbyId]
@@ -99,28 +102,29 @@ module.exports.initGameSession = function(io, socket) {
         });
 
         let roundDone = true;
+        // Ensure that each player has submitted their guess 
         for (var key in game.scores) {
             roundDone &= game.scores[key].length >= game.round + 1
         }
+        // if every player submitted a guess, move on to the next round
         if (roundDone) {
             game.round++;
             sendNextMultiPlayerImage(roomId);
         }
-
+        // emit the user's score to them
         socket.emit('score', score);
-
-        // game.round++;
-        // sendNextImage(socket);
     });
 
-
+    // Send next game image to multiplayer games
     function sendNextMultiPlayerImage(roomId) {
+        // Get game from multiplayer games array
         game = multiPlayerGames[roomId]
         if (!game) {
             console.error(`Game not found for ${socket.id}`)
             return;
         }
         console.log(`next image ${game.round} + ${game.gameList.length}`)
+            // If we have gone through all the images for the game, end the game
         if (game.round >= game.gameList.length) {
             console.log('game over')
             io.to(roomId).emit('gameOver', null);
@@ -129,11 +133,12 @@ module.exports.initGameSession = function(io, socket) {
             membersMap = [...members].map((sockId) => {
                 membersKV[sockId] = socketMap[sockId]
             });
+            // Add the game history for the game
             database.addMultiPlayerGameHistory(roomId, {
                 game: multiPlayerGames[roomId],
                 members: membersKV
             });
-
+            // Delete the socketio room 
             delete multiPlayerGames[roomId]
         } else {
             console.log('getImage from ' + socket.id)
@@ -154,12 +159,12 @@ module.exports.initGameSession = function(io, socket) {
             scores: []
         };
     });
-
+    // Get image for singleplayer game
     socket.on('getImage', (data) => {
         sendNextImage(socket);
     });
 
-
+    // Submit a guess for a singleplayer game 
     socket.on('submitGuess', (data) => {
         console.log('submitGuess from ' + socket.id)
         game = games[socket.id]
@@ -178,12 +183,16 @@ module.exports.initGameSession = function(io, socket) {
             });
             socket.emit('score', score);
         }
+        // Move to next round
         game.round++;
+        // send next round's image
         sendNextImage(socket);
     });
 }
 
+// Send the next image to the singleplayer game user
 function sendNextImage(socket) {
+    // get singleplayer game
     game = games[socket.id]
     if (!game) {
         console.error(`Game not found for ${socket.id}`)
@@ -194,29 +203,32 @@ function sendNextImage(socket) {
         console.log('game over')
         socket.emit('gameOver', null);
 
-
+        // if game ended, add game history for the single player game
         database.addSinglePlayerGameHistory(socket.id, {
             user: socketMap[socket.id],
             game: games[socket.id],
             score: games[socket.id].scores.reduce((b, a) => b + a.score, 0)
         });
-
+        // delete the room
         delete games[socket.id];
     } else {
+        // if game not ended, send next image
         console.log('getImage from ' + socket.id)
         socket.emit('newImage', game.gameList[game.round]);
     }
 }
 
+// Calculate the user's round score
 function calcScore(actual, guess) {
     return MAX_SCORE - Math.floor(Math.sqrt(Math.pow(actual.x - guess.x, 2) + Math.pow(actual.y - guess.y, 2)))
 }
-// 
+
+// Get the list of images to use for the game
 function getGameList() {
     return getRandomSubarray(database.getGames(), GAME_LENGTH);
 }
 
-// https://stackoverflow.com/questions/11935175/sampling-a-random-subset-from-an-array
+// From: https://stackoverflow.com/questions/11935175/sampling-a-random-subset-from-an-array
 function getRandomSubarray(arr, size) {
     var shuffled = arr.slice(0),
         i = arr.length,
