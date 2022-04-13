@@ -64,7 +64,7 @@ export default function MultiPlayerGamePage() {
         // return () => socket.close();
     }, [navigate, setSocket, setMembers, setGameStarted, setLobbyId, user]);
 
-    const startGame = function() {
+    const startGame = function () {
         console.log('start game message sent to lobby')
         socket.emit('startMultiPlayer', user)
     }
@@ -76,26 +76,29 @@ export default function MultiPlayerGamePage() {
     return (
         <div className="App">
             <RexAppBar />
-            <Container maxWidth="false"
+            <Container maxWidth="md"
                 style={{
-                    marginTop: '6px',
+                    maxWidth: '1200px',
+                    backgroundColor: '#ffffff',
+                    marginTop: '45px',
+                    borderRadius: '20px'
                 }}>
                 {socket ? (
                     !gameStarted ? (
-                    <Grid container spacing={2} id="">
-                        <Grid item xs={12}>
-                            {members ? (
-                                <LobbyMembers members={members} />
-                            ) : (
-                                <div className="error">Waiting for others to join...</div>
-                            )}
+                        <Grid container spacing={2} id="">
+                            <Grid item xs={12} style={{ minHeight: '60vh' }}>
+                                {members ? (
+                                    <LobbyMembers members={members} />
+                                ) : (
+                                    <div className="error">Waiting for others to join...</div>
+                                )}
+                            </Grid>
+                            <Grid item xs={12} style={{ marginBottom: '20px' }}>
+                                <Button variant="contained" disabled={members.length < 2} onClick={startGame}>Start Game</Button>
+                            </Grid>
                         </Grid>
-                        <Grid item xs={12}>
-                            <Button variant="contained" disabled={members.length < 2} onClick={startGame}>Start Game</Button>
-                        </Grid>
-                    </Grid>
-                    ) :(
-                        <MultiPlayerGame socket={socket} lobbyId={lobbyId}/>
+                    ) : (
+                        <MultiPlayerGame socket={socket} lobbyId={lobbyId} />
                     )
                 ) : (
                     <div className="error">Waiting for socket</div>
