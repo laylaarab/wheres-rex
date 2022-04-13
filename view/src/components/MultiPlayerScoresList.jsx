@@ -1,9 +1,6 @@
-import { useState, useContext } from "react";
-import { useQuery } from 'react-query'
-import Grid from '@mui/material/Grid';
+import { useContext } from "react";
 import { List, ListItem, ListItemIcon, ListItemText, Avatar } from '@mui/material'
 import { UserContext } from "../context/UserContext";
-import axios from 'axios';
 
 
 export default function MultiPlayerScoresList({ scores }) {

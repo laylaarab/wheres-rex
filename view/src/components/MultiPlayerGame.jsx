@@ -1,10 +1,7 @@
 import { useState, useContext, useEffect } from "react";
-import { useQuery } from 'react-query'
 import { useNavigate } from "react-router-dom";
 import Grid from '@mui/material/Grid';
-import { List, ListItem, ListItemIcon, ListItemText, Avatar } from '@mui/material'
 import { UserContext } from "../context/UserContext";
-import axios from 'axios';
 import PhotoSphere from "./PhotoSphere";
 import MapLocation from "./MapLocation";
 import Score from "./Score";

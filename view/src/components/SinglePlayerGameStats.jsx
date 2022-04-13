@@ -1,10 +1,7 @@
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { useQuery } from 'react-query'
 import Grid from '@mui/material/Grid';
 import { UserContext } from "../context/UserContext";
-import FlagIcon from '@mui/icons-material/Flag';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import axios from 'axios';
 import UserStats from "./landing-page/UserStats";
 

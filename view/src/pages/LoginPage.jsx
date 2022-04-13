@@ -1,11 +1,5 @@
-import { useState, useContext } from "react";
+import { useContext } from "react";
 
-import Container from '@mui/material/Container';
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
-import { Button } from "@mui/material";
-
-import Item from "../components/Item";
 import Grid from '@mui/material/Grid';
 import Dino from "../assets/dino.png";
 import background from "../assets/campus-blurred.jpg"
