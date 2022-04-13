@@ -26,3 +26,9 @@ If you run into issues:
 - docker-compose version 1.29.2
 - Docker version 20.10.12
 
+### Github Repo
+Repo can be found at https://github.com/laylaarab/wheres-rex
+
+### Live Version
+The live version can be played by navigating to http://www.wheresrex.ca/ and logging in with a Google account
+
