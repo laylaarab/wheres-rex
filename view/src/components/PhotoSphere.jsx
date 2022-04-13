@@ -7,7 +7,7 @@ export default function PhotoSphere({ imgUrl }) {
   return (
     <Pannellum
       width="100%"
-      height="85vh"
+      height="89vh"
       image={imgUrl}
       pitch={10}
       yaw={180}
