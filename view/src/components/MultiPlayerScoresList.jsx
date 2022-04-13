@@ -8,21 +8,29 @@ import axios from 'axios';
 
 export default function MultiPlayerScoresList({ scores }) {
     const [user, _] = useContext(UserContext);
-
+    const flattenScores = (scoreObj) => {
+        let scoresArr = [];
+        Object.keys(scoreObj).map((key, index) => {
+            scoresArr.push(scoreObj[key]);
+        });
+        return scoresArr.sort((a, b) => (a.score < b.score) ? 1 : -1)
+    }
     return (
         <div>
-            <h1>Players</h1>
-            <List>
-                {Object.keys(scores).map((key, index) => {
-                    if (!scores[key]) return(<></>)
+            <h2 style={{ color: 'grey', textAlign: 'left', marginLeft: '15px' }}>Players</h2>
+            <List >
+                {flattenScores(scores).map((userScore, index) => {
+                    if (!userScore) return (<></>)
+                    let winner = index == 0
+
                     return (
-                        <ListItem key={index}>
+                        <ListItem className={winner ? 'winner' : ''} style={{ borderBottom: "1px solid rgb(212, 212, 212)" }} key={userScore.user.googleId}>
                             <ListItemIcon>
-                                <Avatar src={scores[key].user.imageUrl}/>
+                                <Avatar src={userScore.user.imageUrl} />
                             </ListItemIcon>
                             <ListItemText
-                                primary={scores[key].user.name}
-                                secondary={`Scored ${scores[key].score} points`}
+                                primary={userScore.user.name}
+                                secondary={`Scored ${userScore.score} points`}
                             />
                         </ListItem>
                     )

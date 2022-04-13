@@ -36,15 +36,18 @@ export default function MultiPlayerGameResultsPage() {
     return (
         <div className="App">
             <RexAppBar />
-            <Container maxWidth="false"
+            <Container maxWidth="md"
                 style={{
-                    marginTop: '6px',
+                    maxWidth: '1200px',
+                    backgroundColor: '#ffffff',
+                    marginTop: '45px',
+                    borderRadius: '20px'
                 }}>
                 <Grid container spacing={2} id="">
                     <Grid item xs={12}>
                         <MultiPlayerGameStats gameId={gameId} roomId={roomId} />
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid item xs={12} style={{ marginBottom: '20px' }}>
                         <Button variant="contained" component={Link} to="/landing-page">HOME</Button>
                     </Grid>
                 </Grid>

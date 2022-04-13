@@ -29,10 +29,10 @@ export default function SinglePlayerGameStats({ roomId, gameId }) {
                     <>
                         <Grid item xs={12}>
                             <h1>Congrats {user.name}!</h1>
-                            <h2>You scored {data[gameId].score} points!</h2>
+                            <h2 style={{ color: 'rgb(115 154 34)    ' }}>You scored {data[gameId].score} points!</h2>
                         </Grid>
-                        <Grid item xs={12}>
-                            <MultiPlayerScoresList scores={data}/>
+                        <Grid item md={3} xs={12}>
+                            <MultiPlayerScoresList scores={data} />
                         </Grid>
                     </>
                 ) : (

@@ -25,15 +25,16 @@ export default function SinglePlayerGameStats({ gameId }) {
         <Grid item container xs={12} className="scores-box">
             {data ? (
                 <Grid item xs={12}>
-                    <h1>Congrats {user.name}!</h1>
-                    <h2>You scored {data.score} points!</h2>
+                    <h1 >Congrats {user.name}!</h1>
+                    <h2 style={{ color: 'rgb(115 154 34)' }}>You scored {data.score} points!</h2>
                 </Grid>
             ) :
                 (
                     <div className="error">Loading...</div>
                 )
             }
-            <Grid item xs={12}>
+            <Grid style={{ marginTop: '50px', minHeight: '10vh' }}
+                s={20} xs={12}>
                 <UserStats />
             </Grid>
         </Grid>

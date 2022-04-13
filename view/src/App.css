@@ -37,7 +37,6 @@ body {
     from {
         transform: rotate(0deg);
     }
-
     to {
         transform: rotate(360deg);
     }
@@ -84,7 +83,6 @@ h1.name {
 div#map-grid {
     margin-top: -300px;
     cursor: crosshair;
-
 }
 
 div#map-loc-fix {
@@ -114,9 +112,13 @@ div#chip-score {
     left: 75px;
 }
 
+li.winner {
+    background: #ceea94;
+}
 
 
 /* Responsive Sizing for Mobile */
+
 @media screen and (max-width: 800px) {
     h1.name {
         color: #525252;
@@ -124,7 +126,6 @@ div#chip-score {
         padding-left: 20px;
         padding-bottom: 50px;
     }
-
     h1.login-title {
         color: white;
         font-size: 1.2em;
@@ -132,7 +133,6 @@ div#chip-score {
         text-shadow: 6px 12px 14px black;
         width: 95%;
     }
-
     h2.login-explore,
     h3.login-explore {
         color: white;
@@ -151,7 +151,6 @@ div#chip-score {
         text-shadow: 6px 12px 14px black;
         width: 95%;
     }
-
     h2.login-explore,
     h3.login-explore {
         color: white;

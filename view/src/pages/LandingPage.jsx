@@ -32,7 +32,8 @@ function LandingPage() {
                     maxWidth: '1200px',
                     backgroundColor: '#ffffff',
                     marginTop: '45px',
-                    borderRadius: '20px'
+                    borderRadius: '20px',
+                    paddingBottom: '30px',
                 }}>
                 <Grid container spacing={2} id="">
                     <Grid item container spacing={2} xs={12}>
