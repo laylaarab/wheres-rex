@@ -62,26 +62,24 @@ export default function SinglePlayerGamePage() {
     return (
         <div className="App">
             <RexAppBar />
-            <Container maxWidth="false">
-                {socket ? (
-                    <Grid container spacing={2} id="">
-                        <Score score={score} />
-                        <Grid item xs={12} sm={12} md={12}>
-                            <PhotoSphere imgUrl={'/img_360/' + img} />
+            {socket ? (
+                <Grid container spacing={2} id="">
+                    <Score score={score} />
+                    <Grid item xs={12} sm={12} md={12}>
+                        <PhotoSphere imgUrl={'/img_360/' + img} />
+                    </Grid>
+                    <Grid container id="map-grid">
+                        <Grid item md={9} xs={12}>
                         </Grid>
-                        <Grid container id="map-grid">
-                            <Grid item md={9} xs={12}>
-                            </Grid>
-                            <Grid id="map-loc-fix" item md={3} xs={12}>
-                                <MapLocation width={350} height={300} socket={socket} handler={submitGuess} />
-                            </Grid>
+                        <Grid id="map-loc-fix" item md={3} xs={12}>
+                            <MapLocation width={350} height={300} socket={socket} handler={submitGuess} />
                         </Grid>
                     </Grid>
-                ) : (
-                    <div className="error">Waiting for socket</div>
-                )}
+                </Grid>
+            ) : (
+                <div className="error">Waiting for socket</div>
+            )}
 
-            </Container>
         </div>
     );
 }

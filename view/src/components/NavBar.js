@@ -42,6 +42,7 @@ const RexAppBar = () => {
                             component="img"
                             sx={{
                                 height: 60,
+                                marginTop: 2,
                                 overflow: 'visible',
                             }}
                             alt="Logo"

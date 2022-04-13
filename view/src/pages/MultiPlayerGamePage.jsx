@@ -64,15 +64,15 @@ export default function MultiPlayerGamePage() {
     return (
         <div className="App">
             <RexAppBar />
-            <Container maxWidth="md"
-                style={{
-                    maxWidth: '1200px',
-                    backgroundColor: '#ffffff',
-                    marginTop: '45px',
-                    borderRadius: '20px'
-                }}>
-                {socket ? (
-                    !gameStarted ? (
+            {socket ? (
+                !gameStarted ? (
+                    <Container maxWidth="md"
+                        style={{
+                            maxWidth: '1200px',
+                            backgroundColor: '#ffffff',
+                            marginTop: '45px',
+                            borderRadius: '20px'
+                        }}>
                         <Grid container spacing={2} id="">
                             <Grid item xs={12} style={{ minHeight: '60vh' }}>
                                 {members ? (
@@ -85,14 +85,14 @@ export default function MultiPlayerGamePage() {
                                 <Button variant="contained" disabled={members.length < 2} onClick={startGame}>Start Game</Button>
                             </Grid>
                         </Grid>
-                    ) : (
-                        <MultiPlayerGame socket={socket} lobbyId={lobbyId} />
-                    )
+                    </Container>
                 ) : (
-                    <div className="error">Waiting for socket</div>
-                )}
+                    <MultiPlayerGame socket={socket} lobbyId={lobbyId} />
+                )
+            ) : (
+                <div className="error">Waiting for socket</div>
+            )}
 
-            </Container>
         </div>
     );
 }
